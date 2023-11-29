@@ -17,7 +17,7 @@ len(train_labels)
 len(test_labels)
 
 plt.figure()
-plt.imshow(train_images[3])
+plt.imshow(train_images[8])
 plt.colorbar()
 plt.grid(False)
 plt.show()
