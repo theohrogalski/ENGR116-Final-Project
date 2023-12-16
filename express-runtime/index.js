@@ -48,7 +48,12 @@ app.ws('/websocket', function(ws, req) {
 });
 
 //Serve the react build statically (like traditional web server)
-app.use(express.static(path.join(process.cwd(), '../react/build')));
+app.use(
+    express.static(
+        path.join(
+            process.cwd(), '../react/build')
+            )
+    );
 
 //Hi!
 app.use((req, res) => {

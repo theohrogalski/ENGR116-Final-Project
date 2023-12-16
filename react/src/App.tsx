@@ -56,12 +56,17 @@ function App() {
 
         //Create tensor from image
         //Tensor dimentions - (width, height, channels) -> (180, 180, 3)
-        let tensorImage = tf.browser.fromPixels(imageObj);
+        let tensorImage = tf.browser
+          .fromPixels(imageObj);
         //Expand tensor from (180, 180, 3) to (1, 180, 180, 3)
         let expandedTensor = tf.expandDims(tensorImage);
 
         //Relay input tensor to processing server (express host)
-        socket.send(JSON.stringify(await expandedTensor.array()));
+        socket.send(
+          JSON.stringify(
+            await expandedTensor.array()
+          )
+        );
 
         //Let garbage collector know to collect finished tensors (Memory Optimization)
         tf.dispose(expandedTensor);
@@ -81,7 +86,9 @@ function App() {
     socket.addEventListener("message", async (event) => {
       console.log(event.data)
 
-      let result = tf.tensor(JSON.parse(event.data));
+      let result = tf.tensor(
+        JSON.parse(event.data)
+      );
 
       //Debug result outputs
       result.print();
@@ -119,7 +126,7 @@ function App() {
         {file ? 
           <div>
             <img src={file}/>
-            <p>This is a {type}! Confidance: {confidence}</p>
+            <p>This is a {type}! Confidence: {confidence}</p>
           </div> 
         : 
           <p>No Image uploaded!</p>
